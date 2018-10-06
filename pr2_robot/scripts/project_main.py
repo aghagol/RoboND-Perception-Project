@@ -61,12 +61,12 @@ def pcl_callback(pcl_msg):
     cloud_filtered = outlier_filter.filter()
 
     # TODO: Voxel Grid Downsampling
-    # vox = cloud_filtered.make_voxel_grid_filter()
-    # LEAF_SIZE = .01
-    # vox.set_leaf_size(LEAF_SIZE, LEAF_SIZE, LEAF_SIZE)
-    # cloud_filtered = vox.filter()
+    vox = cloud_filtered.make_voxel_grid_filter()
+    LEAF_SIZE = .01
+    vox.set_leaf_size(LEAF_SIZE, LEAF_SIZE, LEAF_SIZE)
+    cloud_filtered = vox.filter()
 
-    # TODO: PassThrough Filter
+    # TODO: PassThrough Filter to extract table top and objects
     passthrough = cloud_filtered.make_passthrough_filter()
     passthrough.set_filter_field_name('z')
     passthrough.set_filter_limits(0.608, 0.8)
@@ -158,48 +158,84 @@ def pcl_callback(pcl_msg):
     # Suggested location for where to invoke your pr2_mover() function within pcl_callback()
     # Could add some logic to determine whether or not your object detections are robust
     # before calling pr2_mover()
-    # try:
-    #     pr2_mover(detected_objects_list)
-    # except rospy.ROSInterruptException:
-    #     pass
+    try:
+        pr2_mover(detected_objects)
+    except rospy.ROSInterruptException:
+        pass
 
 # function to load parameters and request PickPlace service
-def pr2_mover(object_list):
+def pr2_mover(detected_objects):
 
     # TODO: Initialize variables
+    test_scene_num = Int32()
+    test_scene_num.data = 1
 
     # TODO: Get/Read parameters
+    object_list_param = rospy.get_param('/object_list')
+    dropbox_param = rospy.get_param('/dropbox')
 
     # TODO: Parse parameters into individual variables
+    label_to_group = {object_item['name']: object_item['group']
+        for object_item in object_list_param}
+
+    group_to_position = {dropbox_item['group']: dropbox_item['position']
+        for dropbox_item in dropbox_param}
+
+    group_to_arm = {dropbox_item['group']: dropbox_item['name']
+        for dropbox_item in dropbox_param}
 
     # TODO: Rotate PR2 in place to capture side tables for the collision map
 
     # TODO: Loop through the pick list
+    labels = []
+    centroids = [] # to be list of tuples (x, y, z)
+    yaml_dict_list = []
 
+    for do in detected_objects:
         # TODO: Get the PointCloud for a given object and obtain it's centroid
+        labels.append(do.label)
+        points_arr = ros_to_pcl(do.cloud).to_array()
+        centroid = np.mean(points_arr, axis=0)[:3].tolist()
+        centroids.append(centroid)
 
         # TODO: Create 'place_pose' for the object
+        object_name = String()
+        object_name.data = str(do.label)
+
+        pick_pose = Pose()
+        pick_pose.position.x = centroid[0]
+        pick_pose.position.y = centroid[1]
+        pick_pose.position.z = centroid[2]
+
+        place_pose = Pose()
+        place_pose.position.x = group_to_position[label_to_group[do.label]][0]
+        place_pose.position.y = group_to_position[label_to_group[do.label]][1]
+        place_pose.position.z = group_to_position[label_to_group[do.label]][2]
 
         # TODO: Assign the arm to be used for pick_place
+        arm_name = String()
+        arm_name.data = group_to_arm[label_to_group[do.label]]
 
         # TODO: Create a list of dictionaries (made with make_yaml_dict()) for later output to yaml format
+        yaml_dict = make_yaml_dict(test_scene_num, arm_name, object_name, pick_pose, place_pose)
+        yaml_dict_list.append(yaml_dict)
 
-        # Wait for 'pick_place_routine' service to come up
-        rospy.wait_for_service('pick_place_routine')
+        # # Wait for 'pick_place_routine' service to come up
+        # rospy.wait_for_service('pick_place_routine')
 
-        try:
-            pick_place_routine = rospy.ServiceProxy('pick_place_routine', PickPlace)
+        # try:
+        #     pick_place_routine = rospy.ServiceProxy('pick_place_routine', PickPlace)
 
-            # TODO: Insert your message variables to be sent as a service request
-            resp = pick_place_routine(TEST_SCENE_NUM, OBJECT_NAME, WHICH_ARM, PICK_POSE, PLACE_POSE)
+        #     # TODO: Insert your message variables to be sent as a service request
+        #     resp = pick_place_routine(TEST_SCENE_NUM, OBJECT_NAME, WHICH_ARM, PICK_POSE, PLACE_POSE)
 
-            print ("Response: ",resp.success)
+        #     print ("Response: ",resp.success)
 
-        except rospy.ServiceException, e:
-            print "Service call failed: %s"%e
+        # except rospy.ServiceException, e:
+        #     print "Service call failed: %s"%e
 
     # TODO: Output your request parameters into output yaml file
-
+    send_to_yaml('output_1.yaml', yaml_dict_list)
 
 
 if __name__ == '__main__':
