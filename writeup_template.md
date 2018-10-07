@@ -234,7 +234,7 @@ Detailed steps for performing the object recognition task and generating the `ou
 
 A problem with naively applying the trained SVM classifier on the point cloud from `/pr2/world/points` topic is that corners of dropboxes could be detected as one of the object types. This is mainly because dropboxes do not exist in the training data that is simulated in `sensor_stick/scripts/capture_features.py`. 
 
-As a temporary solution, I added a point cloud pssthrough filter in the [project code](https://github.com/aghagol/RoboND-Perception-Project/blob/master/pr2_robot/scripts/project_template.py) which discard points outside of range [-0.5, 0.5] in the y axis.
+As a temporary solution, I added a PCL Passthrough filter in the [project code](https://github.com/aghagol/RoboND-Perception-Project/blob/master/pr2_robot/scripts/project_template.py) which discard points outside of range [-0.5, 0.5] in the y axis.
 
 #### 2. Further improvements.
 
