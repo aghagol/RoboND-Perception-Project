@@ -194,7 +194,7 @@ for do in detected_objects:
 
 8. Submit a link to your GitHub repo for the project or the Python code for your perception pipeline and your output `.yaml` files (3 `.yaml` files, one for each test world).  You must have correctly identified 100% of objects from `pick_list_1.yaml` for `test1.world`, 80% of items from `pick_list_2.yaml` for `test2.world` and 75% of items from `pick_list_3.yaml` in `test3.world`.
 
-Output files are in [this](https://github.com/aghagol/RoboND-Perception-Project/tree/master/pr2_robot/scripts) directory.
+Output files are in [pr2_robot/scripts](https://github.com/aghagol/RoboND-Perception-Project/tree/master/pr2_robot/scripts) directory.
 
 9. Congratulations!  Your Done!
 
@@ -211,19 +211,21 @@ You're reading it!
 ### Exercise 1, 2 and 3 pipeline implemented
 #### 1. Complete Exercise 1 steps. Pipeline for filtering and RANSAC plane fitting implemented.
 
+Completed Excercise 1 code can be found here: https://github.com/aghagol/RoboND-Perception-Exercises/blob/master/Exercise-1/RANSAC.py
+
 #### 2. Complete Exercise 2 steps: Pipeline including clustering for segmentation implemented.  
 
-#### 2. Complete Exercise 3 Steps.  Features extracted and SVM trained.  Object recognition implemented.
-Here is an example of how to include an image in your writeup.
+Completed Excercise 2 code can be found here: https://github.com/aghagol/RoboND-Perception-Exercises/blob/master/Exercise-2/sensor_stick/scripts/segmentation.py
 
-![demo-1](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+#### 2. Complete Exercise 3 Steps.  Features extracted and SVM trained.  Object recognition implemented.
+
+Completed Excercise 3 code can be found here: https://github.com/aghagol/RoboND-Perception-Exercises/blob/master/Exercise-3/sensor_stick/scripts/object_recognition.py
 
 ### Pick and Place Setup
 
 #### 1. For all three tabletop setups (`test*.world`), perform object recognition, then read in respective pick list (`pick_list_*.yaml`). Next construct the messages that would comprise a valid `PickPlace` request output them to `.yaml` format.
 
-And here's another image! 
-![demo-2](https://user-images.githubusercontent.com/20687560/28748286-9f65680e-7468-11e7-83dc-f1a32380b89c.png)
+The steps for object recognition for all 3 test worlds are described above.
 
 Spend some time at the end to discuss your code, what techniques you used, what worked and why, where the implementation might fail and how you might improve it if you were going to pursue this project further.  
 
