@@ -5,9 +5,10 @@
 # Required Steps for a Passing Submission:
 1. Extract features and train an SVM model on new objects (see `pick_list_*.yaml` in `/pr2_robot/config/` for the list of models you'll be trying to identify). 
 
-I used the sensor_stick project source code for training an SVM classifier based on normal and color histogram features. Here are the objects and training results for each world:
+I used the sensor_stick project source code for training an SVM classifier based on normal and color histogram features. Here are the objects and training results for each test world. I increased the number of training samples per object to 50.
 
-World 1:
+
+**Test world 1**:
 
 ```python
 models = [
@@ -17,9 +18,11 @@ models = [
 ]
 ```
 
+![model_1_confusion](/images/model_1_confusion.png)
+![model_1_confusion_normal](/images/model_1_confusion_normal.png)
 
 
-World 2:
+**Test world 2**:
 
 ```python
 models = [
@@ -31,9 +34,11 @@ models = [
 ]
 ```
 
+![model_2_confusion](/images/model_2_confusion.png)
+![model_2_confusion_normal](/images/model_2_confusion_normal.png)
 
 
-World 3:
+**Test world 3**:
 
 ```python
 models = [
@@ -48,6 +53,11 @@ models = [
 ]
 ```
 
+![model_3_confusion](/images/model_3_confusion.png)
+![model_3_confusion_normal](/images/model_3_confusion_normal.png)
+
+
+Overall, the training results look satisfactory for all three test worlds.
 
 
 2. Write a ROS node and subscribe to `/pr2/world/points` topic. This topic contains noisy point cloud data that you must work with.
