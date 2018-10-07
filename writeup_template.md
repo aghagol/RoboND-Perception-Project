@@ -225,9 +225,17 @@ Completed Excercise 3 code can be found here: https://github.com/aghagol/RoboND-
 
 #### 1. For all three tabletop setups (`test*.world`), perform object recognition, then read in respective pick list (`pick_list_*.yaml`). Next construct the messages that would comprise a valid `PickPlace` request output them to `.yaml` format.
 
-The steps for object recognition for all 3 test worlds are described above.
+Detailed steps for performing the object recognition task and generating the `output_*.yaml` files for all 3 test worlds are described [above](https://github.com/aghagol/RoboND-Perception-Project/blob/master/writeup_template.md#required-steps-for-a-passing-submission).
 
-Spend some time at the end to discuss your code, what techniques you used, what worked and why, where the implementation might fail and how you might improve it if you were going to pursue this project further.  
+#### 2. Spend some time at the end to discuss your code, what techniques you used, what worked and why, where the implementation might fail and how you might improve it if you were going to pursue this project further.  
+
+A problem with naively applying the trained SVM classifier on the point cloud from `/pr2/world/points` topic is that corners of dropboxes could be detected as one of the object types. This is mainly because dropboxes do not exist in the training data that is simulated in `sensor_stick/scripts/capture_features.py`. 
 
 
+Some of the methods that I would pursue to improve the recognition quality are:
 
+ - Linear SVM classifier (one-vs-one) is probably not the most powerful classifier for such a complex task. Non-linear classifiers such as RBF kernel SVM and Deep Neural Networks are probably better suited for multi-class object recognition. 
+
+ - Classification could probably benefit from feeding back false positive cases as negative training samples for the support vector machine, also by increasing the loss function weights for false negative samples from the training dataset.
+ 
+ - Normal estimation for object points could probably be improved (around object edges and corners) using more robust approaches than `pcl::NormalEstimation` which would in turn improve the object feature vectors and classification quality.
