@@ -227,14 +227,18 @@ Completed Excercise 3 code can be found here: https://github.com/aghagol/RoboND-
 
 Detailed steps for performing the object recognition task and generating the `output_*.yaml` files for all 3 test worlds are described [above](https://github.com/aghagol/RoboND-Perception-Project/blob/master/writeup_template.md#required-steps-for-a-passing-submission). Output files are in [pr2_robot/scripts](https://github.com/aghagol/RoboND-Perception-Project/tree/master/pr2_robot/scripts) directory.
 
-#### 2. Spend some time at the end to discuss your code, what techniques you used, what worked and why, where the implementation might fail and how you might improve it if you were going to pursue this project further.  
+### Spend some time at the end to discuss your code, what techniques you used, what worked and why, where the implementation might fail and how you might improve it if you were going to pursue this project further.  
+
+
+#### 1. Dropbox being detected as object.
 
 A problem with naively applying the trained SVM classifier on the point cloud from `/pr2/world/points` topic is that corners of dropboxes could be detected as one of the object types. This is mainly because dropboxes do not exist in the training data that is simulated in `sensor_stick/scripts/capture_features.py`. 
 
+As a temporary solution, I added a point cloud pssthrough filter in the [project code](https://github.com/aghagol/RoboND-Perception-Project/blob/master/pr2_robot/scripts/project_template.py) which discard points outside of range [-0.5, 0.5] in the y axis.
 
+#### 2. Further improvements.
 
-
-Some of the methods that I would pursue to improve the recognition quality are:
+Some other methods that I would pursue to improve the recognition quality are:
 
  - Linear SVM classifier (one-vs-one) is probably not the most powerful classifier for such a complex task. Non-linear classifiers such as RBF kernel SVM and Deep Neural Networks are probably better suited for multi-class object recognition. 
 
