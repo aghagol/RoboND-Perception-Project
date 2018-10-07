@@ -72,6 +72,11 @@ def pcl_callback(pcl_msg):
     passthrough.set_filter_limits(0.608, 0.8)
     cloud_filtered = passthrough.filter()
 
+    passthrough = cloud_filtered.make_passthrough_filter()
+    passthrough.set_filter_field_name('y')
+    passthrough.set_filter_limits(-.5, .5)
+    cloud_filtered = passthrough.filter()
+
     # TODO: RANSAC Plane Segmentation
     seg = cloud_filtered.make_segmenter()
     seg.set_model_type(pcl.SACMODEL_PLANE)

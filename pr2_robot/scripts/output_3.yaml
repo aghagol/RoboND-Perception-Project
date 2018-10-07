@@ -8,9 +8,9 @@ object_list:
       y: 0.0
       z: 0.0
     position:
-      x: 0.5892515778541565
-      y: -0.21854214370250702
-      z: 0.7044400572776794
+      x: 0.5889444351196289
+      y: -0.21902604401111603
+      z: 0.7045966386795044
   place_pose:
     orientation:
       w: 0.0
@@ -31,9 +31,9 @@ object_list:
       y: 0.0
       z: 0.0
     position:
-      x: 0.4234834313392639
-      y: -0.33135032653808594
-      z: 0.7128905653953552
+      x: 0.42359989881515503
+      y: -0.3309578597545624
+      z: 0.7111932635307312
   place_pose:
     orientation:
       w: 0.0
@@ -54,9 +54,9 @@ object_list:
       y: 0.0
       z: 0.0
     position:
-      x: 0.6792796850204468
-      y: 0.004885051399469376
-      z: 0.674716055393219
+      x: 0.6794282793998718
+      y: 0.0048900810070335865
+      z: 0.6752598881721497
   place_pose:
     orientation:
       w: 0.0
@@ -77,9 +77,9 @@ object_list:
       y: 0.0
       z: 0.0
     position:
-      x: 0.4899769127368927
-      y: 0.08328773081302643
-      z: 0.7115792632102966
+      x: 0.4911215603351593
+      y: 0.08363378793001175
+      z: 0.7118421196937561
   place_pose:
     orientation:
       w: 0.0
@@ -100,9 +100,9 @@ object_list:
       y: 0.0
       z: 0.0
     position:
-      x: 0.6076982617378235
-      y: 0.2827351987361908
-      z: 0.6463336944580078
+      x: 0.6079405546188354
+      y: 0.2833675742149353
+      z: 0.6471099853515625
   place_pose:
     orientation:
       w: 0.0
@@ -123,9 +123,9 @@ object_list:
       y: 0.0
       z: 0.0
     position:
-      x: 0.4549386203289032
-      y: -0.0441666841506958
-      z: 0.6762958765029907
+      x: 0.4548427164554596
+      y: -0.044413864612579346
+      z: 0.6758791208267212
   place_pose:
     orientation:
       w: 0.0
@@ -137,8 +137,8 @@ object_list:
       y: -0.71
       z: 0.605
   test_scene_num: 1
-- arm_name: right
-  object_name: biscuits
+- arm_name: left
+  object_name: sticky_notes
   pick_pose:
     orientation:
       w: 0.0
@@ -146,9 +146,9 @@ object_list:
       y: 0.0
       z: 0.0
     position:
-      x: 0.439078688621521
-      y: 0.2166382074356079
-      z: 0.6827295422554016
+      x: 0.43942001461982727
+      y: 0.2168174535036087
+      z: 0.682684600353241
   place_pose:
     orientation:
       w: 0.0
@@ -157,29 +157,6 @@ object_list:
       z: 0.0
     position:
       x: 0
-      y: -0.71
-      z: 0.605
-  test_scene_num: 1
-- arm_name: right
-  object_name: biscuits
-  pick_pose:
-    orientation:
-      w: 0.0
-      x: 0.0
-      y: 0.0
-      z: 0.0
-    position:
-      x: 0.27765095233917236
-      y: 0.5612661242485046
-      z: 0.7216618657112122
-  place_pose:
-    orientation:
-      w: 0.0
-      x: 0.0
-      y: 0.0
-      z: 0.0
-    position:
-      x: 0
-      y: -0.71
+      y: 0.71
       z: 0.605
   test_scene_num: 1
